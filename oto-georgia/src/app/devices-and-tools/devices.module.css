@@ -1,0 +1,61 @@
+/* Devices & Tools Page — Responsive Overrides */
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 4rem;
+  padding: 8rem 2rem 6rem;
+  position: relative;
+  z-index: 2;
+}
+
+.heroVideo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+}
+
+@media (max-width: 1024px) {
+  .heroGrid {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+    padding-top: 6rem !important;
+  }
+  .heroGrid > div:first-child {
+    align-items: center !important;
+  }
+  .heroVideo {
+    max-width: 500px !important;
+    margin: 0 auto !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .featureGrid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .featureGrid > div:last-child {
+    grid-column: span 2;
+  }
+  .featureGrid > div {
+    border-right: none !important;
+    border-bottom: 1px solid var(--glass-border);
+  }
+}
+
+@media (max-width: 480px) {
+  .featureGrid {
+    grid-template-columns: 1fr !important;
+  }
+  .featureGrid > div:last-child {
+    grid-column: span 1;
+  }
+}
