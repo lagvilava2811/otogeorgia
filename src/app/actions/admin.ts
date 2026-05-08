@@ -3,7 +3,7 @@
 import { prisma } from '@/lib/prisma';
 import { revalidatePath } from 'next/cache';
 
-export async function updateProductDiscount(productId: number, newOldPrice: number | null) {
+export async function updateProductDiscount(productId: string, newOldPrice: number | null) {
   await prisma.product.update({
     where: { id: productId },
     data: { 
@@ -19,7 +19,7 @@ export async function updateProductDiscount(productId: number, newOldPrice: numb
 export async function createProduct(formData: FormData) {
   const name = formData.get('name') as string;
   const price = parseFloat(formData.get('price') as string);
-  const categoryId = parseInt(formData.get('categoryId') as string);
+  const categoryId = formData.get('categoryId') as string;
   const description = formData.get('description') as string;
   const imageUrl = formData.get('imageUrl') as string;
 
@@ -30,7 +30,7 @@ export async function createProduct(formData: FormData) {
       name,
       slug,
       price,
-      categoryId,
+      categoryId: categoryId,
       description,
       imageUrl: imageUrl || null,
     }
@@ -40,7 +40,7 @@ export async function createProduct(formData: FormData) {
   revalidatePath('/shop');
 }
 
-export async function deleteProduct(productId: number) {
+export async function deleteProduct(productId: string) {
   await prisma.product.delete({
     where: { id: productId }
   });

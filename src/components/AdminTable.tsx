@@ -9,10 +9,10 @@ type Category = any;
 export default function AdminTable({ initialProducts, categories }: { initialProducts: Product[], categories: Category[] }) {
   const [products, setProducts] = useState<Product[]>(initialProducts);
   const [searchTerm, setSearchTerm] = useState('');
-  const [editingDiscount, setEditingDiscount] = useState<number | null>(null);
+  const [editingDiscount, setEditingDiscount] = useState<string | null>(null);
   const [discountValue, setDiscountValue] = useState('');
 
-  const handleSaveDiscount = async (productId: number) => {
+  const handleSaveDiscount = async (productId: string) => {
     const val = discountValue ? parseFloat(discountValue) : null;
     await updateProductDiscount(productId, val);
     setProducts(products.map(p => p.id === productId ? { ...p, oldPrice: val, isFeatured: val !== null } : p));
